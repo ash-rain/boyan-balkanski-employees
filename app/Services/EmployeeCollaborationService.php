@@ -133,4 +133,25 @@ class EmployeeCollaborationService
     {
         return $pairOverlaps->sortByDesc('total_days')->first() ?? [];
     }
+    public function findAllCollaborations(string $filePath): array
+    {
+        $rows = $this->parseCsv($filePath);
+        $projectGroups = $this->groupByProject($rows);
+        $pairOverlaps = $this->calculatePairOverlaps($projectGroups);
+
+        $collaborations = [];
+
+        foreach ($pairOverlaps as $pair) {
+            foreach ($pair['projects'] as $project) {
+                $collaborations[] = [
+                    'emp1' => $pair['emp1'],
+                    'emp2' => $pair['emp2'],
+                    'project_id' => $project['project_id'],
+                    'days_worked' => $project['days']
+                ];
+            }
+        }
+
+        return $collaborations;
+    }
 }

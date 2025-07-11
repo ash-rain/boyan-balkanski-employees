@@ -3,13 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\EmployeeCollaborationController;
+
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
+
+Route::post('/employee-collaboration/process', [EmployeeCollaborationController::class, 'process']);
+
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('EmployeeCollaboration');
 })->name('home');
-
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';

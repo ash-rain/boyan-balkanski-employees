@@ -22,9 +22,6 @@ class EmployeeCollaborationService
         $rows = collect();
         $file = fopen($filePath, 'r');
 
-        // Skip header
-        fgetcsv($file);
-
         while (($data = fgetcsv($file)) !== false) {
             $rows->push([
                 'emp_id' => (int)$data[0],
@@ -40,20 +37,7 @@ class EmployeeCollaborationService
 
     private function parseDate(?string $dateString): ?Carbon
     {
-        if (empty($dateString)) {
-            return null;
-        }
-
         try {
-            // Try common formats
-            $formats = ['Y-m-d', 'm/d/Y', 'd/m/Y', 'Ymd', 'm-d-Y', 'd-m-Y'];
-
-            foreach ($formats as $format) {
-                $date = Carbon::createFromFormat($format, $dateString);
-                if ($date) return $date;
-            }
-
-            // Fallback to Carbon's parser
             return Carbon::parse($dateString);
         } catch (\Exception $e) {
             return null;

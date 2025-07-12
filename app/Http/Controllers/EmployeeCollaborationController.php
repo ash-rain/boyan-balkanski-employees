@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Services\EmployeeCollaborationService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EmployeeCollaborationController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('EmployeeCollaboration');
+    }
+
     public function process(Request $request, EmployeeCollaborationService $service)
     {
         $request->validate([

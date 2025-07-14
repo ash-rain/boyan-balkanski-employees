@@ -104,8 +104,9 @@ class EmployeeCollaborationService
 
         $start = max($start1, $start2);
         $end = min($end1, $end2);
+        $diff = $end->diffInDays($start);
 
-        return max(0, $end->diffInDays($start));
+        return max(0, $diff);
     }
 
     private function getPairKey(int $emp1, int $emp2): string

@@ -1,10 +1,10 @@
 <template>
 
-    <Head title="Employee Collaboration" />
+    <Head title="Employees" />
     <AuthLayout :breadcrumbs="breadcrumbs">
-        <Heading title="Employee Collaboration Analysis" />
-
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
+            <Heading title="Employee Collaboration Analysis" />
+
             <label for="csvFile" class="block text-sm font-medium text-gray-700 mb-2">
                 Select CSV File
             </label>
